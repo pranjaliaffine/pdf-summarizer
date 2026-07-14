@@ -1,0 +1,615 @@
+{
+  "id": "aeaf7b4d-35ca-43e0-9e4d-974e8ef12064",
+  "spec": {
+    "status": "ready",
+    "problem_statement": "pdf summarizer",
+    "fields": {
+      "use_case": {
+        "key": "use_case",
+        "label": "Main goal",
+        "value": null,
+        "status": "pending",
+        "notes": null,
+        "source": null,
+        "confidence": null
+      },
+      "data_volume": {
+        "key": "data_volume",
+        "label": "How much data",
+        "value": null,
+        "status": "pending",
+        "notes": null,
+        "source": null,
+        "confidence": null
+      },
+      "accuracy_target": {
+        "key": "accuracy_target",
+        "label": "How accurate it must be",
+        "value": null,
+        "status": "pending",
+        "notes": null,
+        "source": null,
+        "confidence": null
+      },
+      "hitl_behavior": {
+        "key": "hitl_behavior",
+        "label": "When someone should review results",
+        "value": null,
+        "status": "pending",
+        "notes": null,
+        "source": null,
+        "confidence": null
+      },
+      "integrations": {
+        "key": "integrations",
+        "label": "Where data comes from and goes",
+        "value": null,
+        "status": "pending",
+        "notes": null,
+        "source": null,
+        "confidence": null
+      },
+      "latency_target": {
+        "key": "latency_target",
+        "label": "How fast answers are needed",
+        "value": null,
+        "status": "pending",
+        "notes": null,
+        "source": null,
+        "confidence": null
+      },
+      "model_preference": {
+        "key": "model_preference",
+        "label": "AI preference",
+        "value": null,
+        "status": "pending",
+        "notes": null,
+        "source": null,
+        "confidence": null
+      },
+      "deployment_platform": {
+        "key": "deployment_platform",
+        "label": "Where it should run",
+        "value": null,
+        "status": "pending",
+        "notes": null,
+        "source": null,
+        "confidence": null
+      },
+      "architectural_flow": {
+        "key": "architectural_flow",
+        "label": "Order of steps in your process",
+        "value": null,
+        "status": "pending",
+        "notes": null,
+        "source": null,
+        "confidence": null
+      },
+      "architectural_flow_feedback": {
+        "key": "architectural_flow_feedback",
+        "label": "Check the steps we understood",
+        "value": null,
+        "status": "pending",
+        "notes": null,
+        "source": null,
+        "confidence": null
+      },
+      "architectural_pattern": {
+        "key": "architectural_pattern",
+        "label": "Overall approach",
+        "value": null,
+        "status": "pending",
+        "notes": null,
+        "source": null,
+        "confidence": null
+      },
+      "core_components": {
+        "key": "core_components",
+        "label": "Main parts you need",
+        "value": null,
+        "status": "pending",
+        "notes": null,
+        "source": null,
+        "confidence": null
+      },
+      "data_flow": {
+        "key": "data_flow",
+        "label": "Where information comes from and goes",
+        "value": null,
+        "status": "pending",
+        "notes": null,
+        "source": null,
+        "confidence": null
+      },
+      "orchestration_model": {
+        "key": "orchestration_model",
+        "label": "How steps run (one-by-one or together)",
+        "value": null,
+        "status": "pending",
+        "notes": null,
+        "source": null,
+        "confidence": null
+      },
+      "scalability_constraints": {
+        "key": "scalability_constraints",
+        "label": "How many people use it at once",
+        "value": null,
+        "status": "pending",
+        "notes": null,
+        "source": null,
+        "confidence": null
+      }
+    },
+    "transcript_summary": "Workflow configured with Entity Extraction Agent and KYC Policy Completeness Validator. User specified Entity Extraction Agent should use the uploaded file name as the identifier for filename input. User specified the validator should start with a standard corporate KYC policy template for completeness checks. User also stated compliance/quality handling should be configured per case with analyst review. Catalog-aligned notes indicate these agents commonly integrate with Azure OpenAI, Azure Blob Storage, and Azure SQL Server, but those remain unconfirmed as user requirements.",
+    "catalog_hints": [
+      {
+        "agent_id": "entity-extraction-agent",
+        "name": "Entity Extraction Agent",
+        "category": "Document & Data",
+        "origin_client": "JPMorgan Chase (JPMC)",
+        "function_summary": "Extracts entities, ownership relationships, and UBO registry records from uploaded corporate KYC documents into structured JSON for SQL persistence.",
+        "score": 0.9,
+        "origin_project": "JPMC KYC Risk Pre-Screening (UBO GraphRAG)",
+        "integrations": "Azure OpenAI, Azure Blob Storage, Azure SQL Server",
+        "model_used": "Azure OpenAI gpt-5.1 (GPT4_LLM_MODEL_DEPLOYMENT_NAME)",
+        "status": "available"
+      },
+      {
+        "agent_id": "kyc-policy-completeness-validator-v2026-03",
+        "name": "KYC Policy Completeness Validator",
+        "category": "Quality & Compliance",
+        "origin_client": "JPMorgan Chase (JPMC)",
+        "function_summary": "Validates extracted KYC data against kyc_ingestion_policy.json required fields and blocks risk analysis when mandatory pre-KYC information is missing.",
+        "score": 0.9,
+        "origin_project": "JPMC KYC Risk Pre-Screening (UBO GraphRAG)",
+        "integrations": "Azure OpenAI, Azure Blob Storage",
+        "model_used": "Azure OpenAI gpt-5.1",
+        "status": "available"
+      }
+    ],
+    "architecture_blueprint": "# Overview\nThis architecture is a document-processing workflow for a PDF summarizer use case that has been configured around two reusable Affine components already identified in discovery:\n\n1. Entity Extraction Agent\n2. KYC Policy Completeness Validator\n\nAlthough the problem statement says \"pdf summarizer,\" the confirmed workflow is specifically oriented to corporate KYC document processing. The system accepts an uploaded PDF, uses the uploaded file name as the document identifier, extracts structured KYC-relevant entities from the document, validates completeness against a standard corporate KYC policy template, and routes the case for analyst review on a per-case basis for compliance and quality handling.\n\nBecause the completed spec leaves most nonfunctional requirements unconfirmed, this Phase 3-ready package stays tightly grounded in what was explicitly stated:\n- input is an uploaded PDF\n- filename should be the uploaded file name\n- extraction is performed by Entity Extraction Agent\n- completeness checking is performed by KYC Policy Completeness Validator\n- validator should start from a standard corporate KYC policy template\n- compliance/quality handling is configured per case with analyst review\n- Azure OpenAI, Azure Blob Storage, and Azure SQL Server are catalog-aligned hints, not confirmed requirements\n\n# End-to-end flow\n1. A user uploads a PDF through an intake gateway.\n2. The gateway registers the case and passes the uploaded file plus the uploaded file name as the identifier.\n3. The Entity Extraction Agent processes the PDF and extracts structured KYC-related entities and relationships.\n4. The extracted output is passed to the KYC Policy Completeness Validator.\n5. The validator evaluates the extracted content against a standard corporate KYC policy template to determine completeness.\n6. The case is routed to an analyst for per-case compliance and quality review.\n7. The reviewed result is finalized as the case output, including extracted structured data and completeness findings suitable for downstream use.\n\n# Core components\n## 1. PDF intake gateway\nA front-door service receives the uploaded PDF and initiates processing. Its key responsibility is to preserve the uploaded file name and pass it forward as the identifier required by the Entity Extraction Agent.\n\n## 2. Entity Extraction Agent\nThis reusable Affine agent is the primary document understanding component. In this engagement it is configured to:\n- accept the uploaded PDF\n- use the uploaded file name as the filename input / identifier\n- extract structured KYC-relevant entities from the document\n\nCatalog hints indicate this agent commonly uses Azure OpenAI and can persist structured JSON for SQL-backed workflows, but those integrations are not treated as mandatory here.\n\n## 3. KYC Policy Completeness Validator\nThis reusable Affine validator checks whether the extracted KYC information is complete enough relative to policy expectations. In this engagement it is configured to:\n- consume the extraction output\n- start with a standard corporate KYC policy template\n- assess completeness of required KYC information\n- produce completeness findings that can support case review\n\n## 4. Analyst review step\nA human analyst reviews each case for compliance and quality handling. This is the explicit human-in-the-loop gate confirmed in discovery. The analyst reviews extraction and completeness results per case before finalization.\n\n## 5. Final case output\nThe workflow ends with a finalized case package containing:\n- document identifier based on uploaded file name\n- extracted structured KYC information\n- completeness assessment against the standard corporate KYC policy template\n- analyst-reviewed disposition\n\n# Data & integrations\n## Confirmed data objects\nThe architecture can be grounded around the following confirmed artifacts:\n- uploaded PDF\n- uploaded file name used as identifier\n- extracted structured KYC data\n- standard corporate KYC policy template\n- completeness validation findings\n- analyst review outcome\n\n## Confirmed integrations\nNo external system integration was explicitly confirmed by the user.\n\n## Catalog-aligned but unconfirmed integrations\nThe catalog hints suggest the following common implementation pattern for the selected agents:\n- Azure OpenAI\n- Azure Blob Storage\n- Azure SQL Server\n\nThese should be treated as implementation options, not locked requirements, until the client confirms source/target systems and hosting preferences.\n\n# Orchestration & reliability\n## Orchestration model\nThe confirmed workflow is sequential:\n- intake\n- extraction\n- completeness validation\n- analyst review\n- finalization\n\nThis is appropriate because the validator depends on extraction output, and analyst review depends on both machine-generated outputs.\n\n## Reliability considerations\nGiven the limited confirmed requirements, the reliability design should focus on simple operational controls:\n- preserve the uploaded file name exactly as received for traceability\n- maintain case-level linkage between source PDF, extraction output, validation findings, and analyst decision\n- fail the case into review if extraction or validation output is incomplete or unusable\n- keep analyst review as the explicit control point for compliance/quality handling\n\n## Quality controls\nThe main quality control is the human analyst review per case. The validator provides a structured pre-review completeness check using the standard corporate KYC policy template, helping the analyst identify missing mandatory information.\n\n# Deployment\nDeployment platform was not confirmed in the spec.\n\nFor Phase 3 planning, the architecture should therefore be treated as deployment-agnostic, with implementation details deferred until the client confirms environment preferences. If the team chooses to align with the selected agents' common pattern, Azure-based deployment would be a natural option, but this remains unconfirmed.\n\n# Risks & open assumptions\n## Risks\n- The stated problem is \"pdf summarizer,\" but the configured workflow is actually a KYC document extraction and completeness-validation flow. The intended business output may need clarification.\n- No latency, throughput, or scale requirements were provided.\n- No explicit storage, system-of-record, or downstream delivery target was confirmed.\n- No model preference or deployment platform was confirmed.\n- The exact structure of the final summary/output package is not defined.\n\n## Open assumptions used in this package\n- The uploaded PDF is the primary input artifact.\n- The uploaded file name is the canonical case/document identifier for processing.\n- The standard corporate KYC policy template is the initial completeness baseline.\n- Analyst review is mandatory per case for compliance/quality handling.\n- The workflow should stop at analyst-reviewed finalization rather than proceeding into any unconfirmed downstream risk analysis or persistence layer.",
+    "graph_draft": {
+      "nodes": [
+        {
+          "id": "pdf-intake-gateway",
+          "label": "PDF Intake Gateway",
+          "type": "gateway",
+          "agent_id": null,
+          "description": "Receives uploaded PDF and passes uploaded file name as identifier",
+          "inputs": [],
+          "outputs": []
+        },
+        {
+          "id": "entity-extraction",
+          "label": "Entity Extraction Agent",
+          "type": "agent",
+          "agent_id": "entity-extraction-agent",
+          "description": "Extracts structured KYC entities from the uploaded PDF",
+          "inputs": [],
+          "outputs": []
+        },
+        {
+          "id": "kyc-completeness-validation",
+          "label": "KYC Policy Completeness Validator",
+          "type": "agent",
+          "agent_id": "kyc-policy-completeness-validator-v2026-03",
+          "description": "Checks extracted data against a standard corporate KYC policy template",
+          "inputs": [],
+          "outputs": []
+        },
+        {
+          "id": "analyst-review",
+          "label": "Analyst Review",
+          "type": "human",
+          "agent_id": null,
+          "description": "Per-case compliance and quality review of extraction and completeness results",
+          "inputs": [],
+          "outputs": []
+        },
+        {
+          "id": "final-case-output",
+          "label": "Final Case Output",
+          "type": "custom",
+          "agent_id": null,
+          "description": "Finalized analyst-reviewed extraction and completeness package",
+          "inputs": [],
+          "outputs": []
+        }
+      ],
+      "edges": [
+        {
+          "from_id": "pdf-intake-gateway",
+          "to_id": "entity-extraction",
+          "label": "uploaded PDF + uploaded file name identifier"
+        },
+        {
+          "from_id": "entity-extraction",
+          "to_id": "kyc-completeness-validation",
+          "label": "structured KYC extraction output"
+        },
+        {
+          "from_id": "kyc-completeness-validation",
+          "to_id": "analyst-review",
+          "label": "completeness findings against standard corporate KYC policy template"
+        },
+        {
+          "from_id": "analyst-review",
+          "to_id": "final-case-output",
+          "label": "reviewed case disposition and finalized output"
+        }
+      ]
+    }
+  },
+  "architecture_plan": {
+    "graph": {
+      "nodes": [
+        {
+          "id": "pdf-intake-gateway",
+          "label": "PDF Intake Gateway",
+          "type": "gateway",
+          "agent_id": null,
+          "description": "Receives uploaded PDF, validates file presence, and passes uploaded file name as the case identifier",
+          "inputs": [],
+          "outputs": []
+        },
+        {
+          "id": "entity-extraction",
+          "label": "Entity Extraction Agent",
+          "type": "custom",
+          "agent_id": null,
+          "description": "Extracts structured KYC-relevant entities from the uploaded PDF using the uploaded file name as identifier",
+          "inputs": [],
+          "outputs": []
+        },
+        {
+          "id": "kyc-completeness-validation",
+          "label": "KYC Policy Completeness Validator",
+          "type": "custom",
+          "agent_id": null,
+          "description": "Evaluates extracted content against a standard corporate KYC policy template for completeness",
+          "inputs": [],
+          "outputs": []
+        },
+        {
+          "id": "analyst-review-gate",
+          "label": "Analyst Review Gate",
+          "type": "gateway",
+          "agent_id": null,
+          "description": "Routes every case to human review for per-case compliance and quality handling",
+          "inputs": [],
+          "outputs": []
+        },
+        {
+          "id": "analyst-review",
+          "label": "Analyst Review",
+          "type": "human",
+          "agent_id": null,
+          "description": "Analyst reviews extraction results and completeness findings and determines final case disposition",
+          "inputs": [],
+          "outputs": []
+        },
+        {
+          "id": "final-case-output",
+          "label": "Final Case Output",
+          "type": "custom",
+          "agent_id": null,
+          "description": "Publishes the finalized analyst-reviewed extraction and completeness package",
+          "inputs": [],
+          "outputs": []
+        }
+      ],
+      "edges": [
+        {
+          "from_id": "pdf-intake-gateway",
+          "to_id": "entity-extraction",
+          "label": "uploaded PDF + uploaded file name identifier"
+        },
+        {
+          "from_id": "entity-extraction",
+          "to_id": "kyc-completeness-validation",
+          "label": "structured KYC entities"
+        },
+        {
+          "from_id": "kyc-completeness-validation",
+          "to_id": "analyst-review-gate",
+          "label": "completeness findings + extracted data"
+        },
+        {
+          "from_id": "analyst-review-gate",
+          "to_id": "analyst-review",
+          "label": "case routed for mandatory human review"
+        },
+        {
+          "from_id": "analyst-review",
+          "to_id": "final-case-output",
+          "label": "approved or amended case package"
+        }
+      ]
+    },
+    "reuse_decisions": [
+      {
+        "node_id": "pdf-intake-gateway",
+        "node_label": "PDF Intake Gateway",
+        "decision": "build",
+        "agent_id": null,
+        "agent_name": null,
+        "rationale": "The catalog ingestion agent is only a weak match and the spec requires a simple intake gateway with filename-as-identifier behavior rather than a broader ingestion component.",
+        "catalog_score": 0.02
+      },
+      {
+        "node_id": "entity-extraction",
+        "node_label": "Entity Extraction Agent",
+        "decision": "build",
+        "agent_id": null,
+        "agent_name": null,
+        "rationale": "The spec names an Entity Extraction Agent, but no matching catalog agent_id was provided in the search results, so this step must be modeled as a custom build for now.",
+        "catalog_score": 0
+      },
+      {
+        "node_id": "kyc-completeness-validation",
+        "node_label": "KYC Policy Completeness Validator",
+        "decision": "build",
+        "agent_id": null,
+        "agent_name": null,
+        "rationale": "The spec names a KYC Policy Completeness Validator, but no matching catalog entry was supplied, so it cannot be marked as reuse or adapt.",
+        "catalog_score": 0
+      },
+      {
+        "node_id": "analyst-review-gate",
+        "node_label": "Analyst Review Gate",
+        "decision": "build",
+        "agent_id": null,
+        "agent_name": null,
+        "rationale": "This is a workflow routing control required by the hitl behavior and is not represented by a reusable catalog agent.",
+        "catalog_score": 0
+      },
+      {
+        "node_id": "analyst-review",
+        "node_label": "Analyst Review",
+        "decision": "build",
+        "agent_id": null,
+        "agent_name": null,
+        "rationale": "Human compliance and quality review is explicitly required per case and should remain a human step rather than an agent reuse decision.",
+        "catalog_score": 0
+      },
+      {
+        "node_id": "final-case-output",
+        "node_label": "Final Case Output",
+        "decision": "build",
+        "agent_id": null,
+        "agent_name": null,
+        "rationale": "Final packaging and publication of the reviewed case output is a lightweight orchestration/output component not covered by the catalog matches.",
+        "catalog_score": 0
+      }
+    ],
+    "catalog_matches": [
+      {
+        "agent_id": "document_ingestion_agent",
+        "name": "Document Ingestion Agent",
+        "category": "Document & Data",
+        "origin_client": "JPMorgan Chase (JPMC)",
+        "origin_project": "JPMC KYC Risk Pre-Screening (UBO GraphRAG)",
+        "function_summary": "Corporate KYC document ingestion entry point: accepts uploaded PDF, DOCX, TXT, or XLSX via file path or blob storage, detects file type, extracts and normalizes text (with OCR for scanned PDFs), chunks content, and emits document_id and text_content for downstream entity extraction and policy valida",
+        "score": 0.015384615398943424,
+        "matched_for": "pdf summarizer\n\nWorkflow configured with Entity Extraction Agent and KYC Policy "
+      },
+      {
+        "agent_id": "document-ingestion-agent",
+        "name": "Document Ingestion Agent",
+        "category": "Document & Data",
+        "origin_client": "JPMorgan Chase (JPMC)",
+        "origin_project": "JPMC KYC Risk Pre-Screening (UBO GraphRAG)",
+        "function_summary": "Corporate KYC document ingestion entry point: accepts uploaded PDF, DOCX, TXT, or XLSX via file path or blob storage, detects file type, extracts and normalizes text (with OCR for scanned PDFs), chunks content, and emits document_id and text_content for downstream entity extraction and policy valida",
+        "score": 0.01515151560306549,
+        "matched_for": "pdf summarizer\n\nWorkflow configured with Entity Extraction Agent and KYC Policy "
+      },
+      {
+        "agent_id": "generation-prompt-author-v2-1-0",
+        "name": "Generation Prompt Author",
+        "category": "Sales & Revenue",
+        "origin_client": "Staples",
+        "origin_project": "Aira (CreAItive Studio)",
+        "function_summary": "Azure vision+text agent that writes per-PDP-image-type multimodal prompts (or per-role directives) from reference photos and PDF excerpts before image generation.",
+        "score": 0.014925372786819935,
+        "matched_for": "pdf summarizer\n\nWorkflow configured with Entity Extraction Agent and KYC Policy "
+      },
+      {
+        "agent_id": "rag_document_retriever",
+        "name": "RAG Document Retriever",
+        "category": "Document & Data",
+        "origin_client": "Affine Analytics",
+        "origin_project": "Affine Horizontal Agents",
+        "function_summary": "Retrieves the most relevant passages from an indexed document corpus for a user query, returning ranked chunks with source citations for grounded answering.",
+        "score": 0.012658228166401386,
+        "matched_for": "pdf summarizer\n\nWorkflow configured with Entity Extraction Agent and KYC Policy "
+      },
+      {
+        "agent_id": "generation_prompt_author",
+        "name": "Generation Prompt Author",
+        "category": "Sales & Revenue",
+        "origin_client": "Staples",
+        "origin_project": "Aira (CreAItive Studio)",
+        "function_summary": "Azure vision+text agent that writes per-PDP-image-type multimodal prompts (or per-role directives) from reference photos and PDF excerpts before image generation.",
+        "score": 0.009803921915590763,
+        "matched_for": "pdf summarizer\n\nWorkflow configured with Entity Extraction Agent and KYC Policy "
+      }
+    ],
+    "summary_markdown": "This Phase 3 architecture keeps a single left-to-right flow from PDF upload to finalized case output, aligned to the confirmed ArchitectureSpec rather than the generic problem title. The workflow is centered on corporate KYC document processing: an intake gateway accepts the uploaded PDF, preserves the uploaded file name as the identifier, then passes the document into extraction and completeness validation before mandatory analyst review.\n\nThe main path is: PDF Intake Gateway -> Entity Extraction -> KYC Policy Completeness Validation -> Analyst Review Gate -> Analyst Review -> Final Case Output. The human-in-the-loop behavior is implemented as an explicit routing gate followed by a human review node because the spec states compliance and quality handling must be configured per case with analyst review. The validator is configured against a standard corporate KYC policy template, and the final output contains the reviewed extraction and completeness package.\n\nReuse is limited because the provided Azure AI Search catalog matches do not include the two spec-named agents as actual available catalog entries in this prompt payload. Although the interview draft referenced agent_ids for Entity Extraction Agent and KYC Policy Completeness Validator, those ids were not present in the supplied catalog matches, so they were conservatively marked as build rather than reuse/adapt. The only nearby catalog option was Document Ingestion Agent, but its function summary is broader and weakly scored, so it was not selected. Orchestration is therefore a straightforward sequential workflow with explicit human approval, and the Azure OpenAI, Azure Blob Storage, and Azure SQL Server references remain integration hints only, not committed dependencies.\n\nPrimary risks are catalog ambiguity and scope drift: the solution is called a PDF summarizer, but the confirmed flow is actually KYC extraction plus completeness validation. If the missing catalog entries are later confirmed, the extraction and validation nodes can be converted from build to reuse with minimal graph change. Another risk is unconfirmed integration architecture, since storage, model hosting, and persistence technologies were mentioned only as catalog-aligned possibilities rather than approved requirements.",
+    "open_questions": [
+      "Should the final output include a natural-language summary in addition to structured extraction and completeness findings, given the original problem statement says pdf summarizer?"
+    ],
+    "validation": {
+      "overall": "warn",
+      "pass_count": 8,
+      "warn_count": 1,
+      "fail_count": 0,
+      "structural_fail_count": 0,
+      "unresolved_actionable_count": 1,
+      "can_approve": false,
+      "approval_hint": "1 issue(s) still need a fix or review.",
+      "items": [
+        {
+          "level": "pass",
+          "code": "has_nodes",
+          "message": "Graph has 6 components and 5 connections.",
+          "node_id": null,
+          "finding_id": "has_nodes:_",
+          "finding_key": "has_nodes:_",
+          "blocks_approval": false,
+          "help_text": "",
+          "remediations": [],
+          "resolved": false,
+          "resolution": null
+        },
+        {
+          "level": "pass",
+          "code": "build_ok",
+          "message": "Custom build for 'PDF Intake Gateway' \u2014 confirm no catalog alternative.",
+          "node_id": "pdf-intake-gateway",
+          "finding_id": "build_ok:pdf-intake-gateway",
+          "finding_key": "build_ok:pdf-intake-gateway",
+          "blocks_approval": false,
+          "help_text": "",
+          "remediations": [],
+          "resolved": false,
+          "resolution": null
+        },
+        {
+          "level": "pass",
+          "code": "build_ok",
+          "message": "Custom build for 'Entity Extraction Agent' \u2014 confirm no catalog alternative.",
+          "node_id": "entity-extraction",
+          "finding_id": "build_ok:entity-extraction",
+          "finding_key": "build_ok:entity-extraction",
+          "blocks_approval": false,
+          "help_text": "",
+          "remediations": [],
+          "resolved": false,
+          "resolution": null
+        },
+        {
+          "level": "pass",
+          "code": "build_ok",
+          "message": "Custom build for 'KYC Policy Completeness Validator' \u2014 confirm no catalog alternative.",
+          "node_id": "kyc-completeness-validation",
+          "finding_id": "build_ok:kyc-completeness-validation",
+          "finding_key": "build_ok:kyc-completeness-validation",
+          "blocks_approval": false,
+          "help_text": "",
+          "remediations": [],
+          "resolved": false,
+          "resolution": null
+        },
+        {
+          "level": "pass",
+          "code": "build_ok",
+          "message": "Custom build for 'Analyst Review Gate' \u2014 confirm no catalog alternative.",
+          "node_id": "analyst-review-gate",
+          "finding_id": "build_ok:analyst-review-gate",
+          "finding_key": "build_ok:analyst-review-gate",
+          "blocks_approval": false,
+          "help_text": "",
+          "remediations": [],
+          "resolved": false,
+          "resolution": null
+        },
+        {
+          "level": "pass",
+          "code": "build_ok",
+          "message": "Custom build for 'Analyst Review' \u2014 confirm no catalog alternative.",
+          "node_id": "analyst-review",
+          "finding_id": "build_ok:analyst-review",
+          "finding_key": "build_ok:analyst-review",
+          "blocks_approval": false,
+          "help_text": "",
+          "remediations": [],
+          "resolved": false,
+          "resolution": null
+        },
+        {
+          "level": "pass",
+          "code": "build_ok",
+          "message": "Custom build for 'Final Case Output' \u2014 confirm no catalog alternative.",
+          "node_id": "final-case-output",
+          "finding_id": "build_ok:final-case-output",
+          "finding_key": "build_ok:final-case-output",
+          "blocks_approval": false,
+          "help_text": "",
+          "remediations": [],
+          "resolved": false,
+          "resolution": null
+        },
+        {
+          "level": "warn",
+          "code": "open_question",
+          "message": "Should the final output include a natural-language summary in addition to structured extraction and completeness findings, given the original problem statement says pdf summarizer?",
+          "node_id": null,
+          "finding_id": "open_question:0",
+          "finding_key": "open_question:0",
+          "blocks_approval": false,
+          "help_text": "Resolve or acknowledge open planning questions.",
+          "remediations": [
+            {
+              "id": "resolve_question",
+              "label": "Mark question resolved",
+              "description": "Remove this open question from the plan.",
+              "finding_id": "open_question:0",
+              "action": "remove_open_question",
+              "node_id": null,
+              "decision": null,
+              "agent_id": null,
+              "agent_name": null,
+              "catalog_score": null,
+              "gateway_label": null,
+              "question_text": "Should the final output include a natural-language summary in addition to structured extraction and completeness findings, given the original problem statement says pdf summarizer?",
+              "edge_from": null,
+              "edge_to": null
+            },
+            {
+              "id": "keep_question",
+              "label": "Keep tracking this question",
+              "description": "Leave open; acknowledge you are aware.",
+              "finding_id": "open_question:0",
+              "action": "acknowledge",
+              "node_id": null,
+              "decision": null,
+              "agent_id": null,
+              "agent_name": null,
+              "catalog_score": null,
+              "gateway_label": null,
+              "question_text": null,
+              "edge_from": null,
+              "edge_to": null
+            }
+          ],
+          "resolved": false,
+          "resolution": null
+        },
+        {
+          "level": "pass",
+          "code": "validation_scope",
+          "message": "Automated checks cover structure, catalog ids, and spec overlap \u2014 not full business proof.",
+          "node_id": null,
+          "finding_id": "validation_scope:_",
+          "finding_key": "validation_scope:_",
+          "blocks_approval": false,
+          "help_text": "",
+          "remediations": [],
+          "resolved": false,
+          "resolution": null
+        }
+      ],
+      "node_status": {
+        "pdf-intake-gateway": "pass",
+        "entity-extraction": "pass",
+        "kyc-completeness-validation": "pass",
+        "analyst-review-gate": "pass",
+        "analyst-review": "pass",
+        "final-case-output": "pass"
+      }
+    },
+    "validation_resolutions": {},
+    "architecture_approved": false
+  },
+  "exportedAt": "2026-07-14T16:32:38.064096+00:00"
+}
