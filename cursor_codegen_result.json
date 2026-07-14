@@ -1,18 +1,18 @@
 {
   "session_id": "aeaf7b4d-35ca-43e0-9e4d-974e8ef12064",
-  "status": "pushing",
+  "status": "error",
   "success": false,
   "scaffold_dir": "C:\\Users\\HP\\Desktop\\agent\\Agentic-LaunchPad\\backend\\data\\generated\\aeaf7b4d-35ca-43e0-9e4d-974e8ef12064",
   "node_count": 6,
   "cursor_agent_id": null,
   "cursor_run_id": null,
-  "repo_url": null,
-  "repo_branch": null,
+  "repo_url": "https://github.com/pranjaliaffine/pdf-summarizer",
+  "repo_branch": "main",
   "pr_url": null,
   "attempt_count": 0,
-  "error": null,
+  "error": "Cursor API create agent failed (400): {'code': 'validation_error', 'message': \"Failed to verify existence of branch 'main' in repository pranjaliaffine/pdf-summarizer. Please ensure the branch name is correct.\"} LaunchPad pushed the scaffold to GitHub, but Cursor could not verify that branch. If the repository is private, connect GitHub in your Cursor account settings and grant access to this repo (or retry with a public repository). You can also wait a few seconds and click Retry.",
   "warnings": [],
   "created_at": "2026-07-14T16:32:38.059633+00:00",
-  "updated_at": "2026-07-14T16:32:38.075414+00:00",
-  "finished_at": null
+  "updated_at": "2026-07-14T16:33:11.394484+00:00",
+  "finished_at": "2026-07-14T16:33:11.394484+00:00"
 }
