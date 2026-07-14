@@ -1,0 +1,16 @@
+{
+  "agent_name": "entity_extraction",
+  "node_id": "entity-extraction",
+  "label": "Entity Extraction Agent",
+  "type": "custom",
+  "inputs": {
+    "filename": {"type": "string", "required": true},
+    "document_text": {"type": "string", "required": true},
+    "case_id": {"type": "string", "required": false}
+  },
+  "outputs": {
+    "entities": {"type": "object", "description": "Structured KYC entities"},
+    "filename": {"type": "string"},
+    "case_id": {"type": "string"}
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "agent_name": "kyc_completeness_validation",
+  "node_id": "kyc-completeness-validation",
+  "label": "KYC Policy Completeness Validator",
+  "type": "custom",
+  "inputs": {
+    "entities": {"type": "object", "required": true},
+    "filename": {"type": "string", "required": true},
+    "case_id": {"type": "string", "required": false}
+  },
+  "outputs": {
+    "completeness_findings": {"type": "object"},
+    "entities": {"type": "object"},
+    "filename": {"type": "string"},
+    "case_id": {"type": "string"}
+  }
+}

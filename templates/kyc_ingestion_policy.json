@@ -1,0 +1,12 @@
+{
+  "template_name": "standard_corporate_kyc",
+  "version": "2026-03",
+  "description": "Standard corporate KYC policy template for completeness validation",
+  "required_fields": [
+    {"field": "legal_entity_name", "label": "Legal entity name", "mandatory": true},
+    {"field": "jurisdiction", "label": "Jurisdiction of incorporation", "mandatory": true},
+    {"field": "registration_number", "label": "Company registration number", "mandatory": true},
+    {"field": "beneficial_owners", "label": "Ultimate beneficial owners", "mandatory": true},
+    {"field": "directors", "label": "Directors or authorized signatories", "mandatory": false}
+  ]
+}

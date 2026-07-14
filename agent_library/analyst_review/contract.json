@@ -1,0 +1,18 @@
+{
+  "agent_name": "analyst_review",
+  "node_id": "analyst-review",
+  "label": "Analyst Review",
+  "type": "human",
+  "inputs": {
+    "entities": {"type": "object", "required": true},
+    "completeness_findings": {"type": "object", "required": true},
+    "filename": {"type": "string", "required": true},
+    "analyst_disposition": {"type": "string", "required": false},
+    "analyst_notes": {"type": "string", "required": false}
+  },
+  "outputs": {
+    "analyst_disposition": {"type": "string"},
+    "analyst_notes": {"type": "string"},
+    "analyst_review_status": {"type": "string"}
+  }
+}
