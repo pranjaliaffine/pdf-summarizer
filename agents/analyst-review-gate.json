@@ -1,0 +1,14 @@
+{
+  "id": "analyst-review-gate",
+  "label": "Analyst Review Gate",
+  "type": "gateway",
+  "agentId": null,
+  "description": "Routes every case to human review for per-case compliance and quality handling",
+  "inputs": [],
+  "outputs": [],
+  "reuseDecision": "build",
+  "catalogAgentName": null,
+  "rationale": "This is a workflow routing control required by the hitl behavior and is not represented by a reusable catalog agent.",
+  "explanation": null,
+  "status": "scaffold"
+}
