@@ -1,0 +1,14 @@
+{
+  "id": "pdf-intake-gateway",
+  "label": "PDF Intake Gateway",
+  "type": "gateway",
+  "agentId": null,
+  "description": "Receives uploaded PDF, validates file presence, and passes uploaded file name as the case identifier",
+  "inputs": [],
+  "outputs": [],
+  "reuseDecision": "build",
+  "catalogAgentName": null,
+  "rationale": "The catalog ingestion agent is only a weak match and the spec requires a simple intake gateway with filename-as-identifier behavior rather than a broader ingestion component.",
+  "explanation": null,
+  "status": "scaffold"
+}
