@@ -1,0 +1,14 @@
+{
+  "id": "analyst-review",
+  "label": "Analyst Review",
+  "type": "human",
+  "agentId": null,
+  "description": "Analyst reviews extraction results and completeness findings and determines final case disposition",
+  "inputs": [],
+  "outputs": [],
+  "reuseDecision": "build",
+  "catalogAgentName": null,
+  "rationale": "Human compliance and quality review is explicitly required per case and should remain a human step rather than an agent reuse decision.",
+  "explanation": null,
+  "status": "scaffold"
+}
