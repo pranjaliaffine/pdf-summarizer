@@ -1,0 +1,14 @@
+{
+  "id": "final-case-output",
+  "label": "Final Case Output",
+  "type": "custom",
+  "agentId": null,
+  "description": "Publishes the finalized analyst-reviewed extraction and completeness package",
+  "inputs": [],
+  "outputs": [],
+  "reuseDecision": "build",
+  "catalogAgentName": null,
+  "rationale": "Final packaging and publication of the reviewed case output is a lightweight orchestration/output component not covered by the catalog matches.",
+  "explanation": null,
+  "status": "scaffold"
+}
