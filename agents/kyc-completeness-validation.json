@@ -1,0 +1,14 @@
+{
+  "id": "kyc-completeness-validation",
+  "label": "KYC Policy Completeness Validator",
+  "type": "custom",
+  "agentId": null,
+  "description": "Evaluates extracted content against a standard corporate KYC policy template for completeness",
+  "inputs": [],
+  "outputs": [],
+  "reuseDecision": "build",
+  "catalogAgentName": null,
+  "rationale": "The spec names a KYC Policy Completeness Validator, but no matching catalog entry was supplied, so it cannot be marked as reuse or adapt.",
+  "explanation": null,
+  "status": "scaffold"
+}
