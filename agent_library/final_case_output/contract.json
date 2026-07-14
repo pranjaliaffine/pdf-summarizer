@@ -1,0 +1,17 @@
+{
+  "agent_name": "final_case_output",
+  "node_id": "final-case-output",
+  "label": "Final Case Output",
+  "type": "custom",
+  "inputs": {
+    "entities": {"type": "object", "required": true},
+    "completeness_findings": {"type": "object", "required": true},
+    "filename": {"type": "string", "required": true},
+    "analyst_disposition": {"type": "string", "required": true}
+  },
+  "outputs": {
+    "case_package": {"type": "object"},
+    "summary": {"type": "string"},
+    "publication_status": {"type": "string"}
+  }
+}

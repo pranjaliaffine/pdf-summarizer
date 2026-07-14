@@ -2,7 +2,71 @@
 
 Agentic workflow architecture exported from **[Agentic LaunchPad](https://github.com)** by Affine Analytics.
 
-> This repository is a scaffold generated from an interactive architecture interview and visual workflow builder. Implement each agent step per the plan below.
+> Runnable multi-agent Python project for corporate KYC PDF processing: intake, entity extraction, completeness validation, analyst review, and final case output.
+
+## Quick start
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
+
+# Run integration tests
+python3 -m pytest tests/ -q
+
+# Execute the workflow with bundled sample PDF (uses rule-based/mock path without Azure keys)
+python3 run_workflow.py --dry-run
+
+# Optional: start FastAPI service
+uvicorn main:app --reload --port 8000
+```
+
+### CLI options
+
+```bash
+python3 run_workflow.py --pdf path/to/document.pdf
+python3 run_workflow.py --input '{"pdf_path":"samples/sample_kyc.pdf","filename":"sample_kyc.pdf"}'
+python3 run_workflow.py --manifest workflow_manifest.json --dry-run
+```
+
+### API endpoints
+
+- `GET /health` — service health check
+- `POST /run` — execute workflow with JSON body `{ "pdf_path": "...", "filename": "..." }`
+
+## Project layout
+
+| Path | Description |
+|------|-------------|
+| `agent_runtime/` | Vendored async framework (`BaseAgent`, registry, `WorkflowExecutor`) |
+| `agent_library/` | Executable workflow step implementations |
+| `workflow_manifest.json` | Step order, input wiring, and sample input |
+| `run_workflow.py` | CLI entry point |
+| `main.py` | FastAPI app |
+| `templates/kyc_ingestion_policy.json` | Standard corporate KYC policy template |
+| `agents/*.json` | LaunchPad export scaffolds (preserved) |
+| `workflow.json` | Full architecture graph from LaunchPad |
+
+## Workflow steps
+
+1. **PDF Intake Gateway** — validates PDF and preserves filename as case identifier
+2. **Entity Extraction Agent** — extracts structured KYC entities (LLM when configured, rule-based fallback)
+3. **KYC Policy Completeness Validator** — checks entities against corporate KYC policy template
+4. **Analyst Review Gate** — routes every case to mandatory human review
+5. **Analyst Review** — HITL step (`HITL_AUTO_APPROVE=true` auto-approves in non-interactive mode)
+6. **Final Case Output** — publishes finalized case package
+
+Results are written to `output/workflow_result.json`.
+
+## Configuration
+
+Copy `.env.example` to `.env`. Azure OpenAI settings are optional; when unset the workflow uses deterministic rule-based extraction.
+
+- `HITL_AUTO_APPROVE=true` — auto-approve analyst review for CLI/testing
+- `DRY_RUN=true` — force mock/rule-based execution
+
+---
 
 ## At a glance
 

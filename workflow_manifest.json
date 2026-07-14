@@ -1,0 +1,96 @@
+{
+  "workflow_id": "pdf-kyc-summarizer",
+  "title": "pdf summarizer",
+  "session_id": "aeaf7b4d-35ca-43e0-9e4d-974e8ef12064",
+  "description": "PDF intake → entity extraction → KYC completeness validation → analyst review → final case output",
+  "agent_library_root": "agent_library",
+  "sampleInput": {
+    "pdf_path": "samples/sample_kyc.pdf",
+    "filename": "sample_kyc.pdf"
+  },
+  "steps": [
+    {
+      "agent": "pdf_intake_gateway",
+      "node_id": "pdf-intake-gateway",
+      "optional": false,
+      "input_map": {
+        "pdf_path": "pdf_path",
+        "filename": "filename"
+      }
+    },
+    {
+      "agent": "entity_extraction",
+      "node_id": "entity-extraction",
+      "optional": false,
+      "input_map": {
+        "case_id": "case_id",
+        "filename": "filename",
+        "document_text": "document_text"
+      }
+    },
+    {
+      "agent": "kyc_completeness_validation",
+      "node_id": "kyc-completeness-validation",
+      "optional": false,
+      "input_map": {
+        "case_id": "case_id",
+        "filename": "filename",
+        "entities": "entities"
+      }
+    },
+    {
+      "agent": "analyst_review_gate",
+      "node_id": "analyst-review-gate",
+      "optional": false,
+      "input_map": {
+        "case_id": "case_id",
+        "filename": "filename",
+        "entities": "entities",
+        "completeness_findings": "completeness_findings"
+      }
+    },
+    {
+      "agent": "analyst_review",
+      "node_id": "analyst-review",
+      "optional": false,
+      "input_map": {
+        "case_id": "case_id",
+        "filename": "filename",
+        "entities": "entities",
+        "completeness_findings": "completeness_findings",
+        "analyst_disposition": "analyst_disposition",
+        "analyst_notes": "analyst_notes"
+      }
+    },
+    {
+      "agent": "final_case_output",
+      "node_id": "final-case-output",
+      "optional": false,
+      "input_map": {
+        "case_id": "case_id",
+        "filename": "filename",
+        "entities": "entities",
+        "completeness_findings": "completeness_findings",
+        "analyst_disposition": "analyst_disposition",
+        "analyst_notes": "analyst_notes"
+      }
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {"id": "pdf-intake-gateway", "agent": "pdf_intake_gateway", "type": "gateway"},
+      {"id": "entity-extraction", "agent": "entity_extraction", "type": "custom"},
+      {"id": "kyc-completeness-validation", "agent": "kyc_completeness_validation", "type": "custom"},
+      {"id": "analyst-review-gate", "agent": "analyst_review_gate", "type": "gateway"},
+      {"id": "analyst-review", "agent": "analyst_review", "type": "human"},
+      {"id": "final-case-output", "agent": "final_case_output", "type": "custom"}
+    ],
+    "edges": [
+      {"from": "pdf-intake-gateway", "to": "entity-extraction", "label": "uploaded PDF + uploaded file name identifier"},
+      {"from": "entity-extraction", "to": "kyc-completeness-validation", "label": "structured KYC entities"},
+      {"from": "kyc-completeness-validation", "to": "analyst-review-gate", "label": "completeness findings + extracted data"},
+      {"from": "analyst-review-gate", "to": "analyst-review", "label": "case routed for mandatory human review"},
+      {"from": "analyst-review", "to": "final-case-output", "label": "approved or amended case package"}
+    ]
+  }
+}

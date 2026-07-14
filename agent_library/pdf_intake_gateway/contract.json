@@ -1,0 +1,16 @@
+{
+  "agent_name": "pdf_intake_gateway",
+  "node_id": "pdf-intake-gateway",
+  "label": "PDF Intake Gateway",
+  "type": "gateway",
+  "inputs": {
+    "pdf_path": {"type": "string", "required": true, "description": "Path to uploaded PDF"},
+    "filename": {"type": "string", "required": false, "description": "Uploaded file name identifier"}
+  },
+  "outputs": {
+    "case_id": {"type": "string", "description": "Case identifier derived from filename"},
+    "filename": {"type": "string", "description": "Preserved uploaded file name"},
+    "pdf_path": {"type": "string", "description": "Validated PDF path"},
+    "document_text": {"type": "string", "description": "Extracted plain text from PDF"}
+  }
+}
