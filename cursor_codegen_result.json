@@ -1,0 +1,18 @@
+{
+  "session_id": "aeaf7b4d-35ca-43e0-9e4d-974e8ef12064",
+  "status": "pushing",
+  "success": false,
+  "scaffold_dir": "C:\\Users\\HP\\Desktop\\agent\\Agentic-LaunchPad\\backend\\data\\generated\\aeaf7b4d-35ca-43e0-9e4d-974e8ef12064",
+  "node_count": 6,
+  "cursor_agent_id": null,
+  "cursor_run_id": null,
+  "repo_url": null,
+  "repo_branch": null,
+  "pr_url": null,
+  "attempt_count": 0,
+  "error": null,
+  "warnings": [],
+  "created_at": "2026-07-14T16:32:38.059633+00:00",
+  "updated_at": "2026-07-14T16:32:38.075414+00:00",
+  "finished_at": null
+}
