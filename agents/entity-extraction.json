@@ -1,0 +1,14 @@
+{
+  "id": "entity-extraction",
+  "label": "Entity Extraction Agent",
+  "type": "custom",
+  "agentId": null,
+  "description": "Extracts structured KYC-relevant entities from the uploaded PDF using the uploaded file name as identifier",
+  "inputs": [],
+  "outputs": [],
+  "reuseDecision": "build",
+  "catalogAgentName": null,
+  "rationale": "The spec names an Entity Extraction Agent, but no matching catalog agent_id was provided in the search results, so this step must be modeled as a custom build for now.",
+  "explanation": null,
+  "status": "scaffold"
+}
